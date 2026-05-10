@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | AgriConnect</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <div class="form-page">
+    <div class="form-card">
+      <h1>Login</h1>
+      <p>Access your AgriConnect account.</p>
+      <form id="loginForm">
+        <label for="email">Email</label>
+        <input id="email" type="email" required>
+
+        <label for="password">Password</label>
+        <input id="password" type="password" required>
+
+        <button class="btn" type="submit">Sign In</button>
+      </form>
+      <p style="margin-top:18px; color:#6b7280;">New here? <a href="signup.html">Create an account</a></p>
+    </div>
+  </div>
+
+  <script src="../assets/js/auth.js"></script>
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    loginForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const result = await auth.login(email, password);
+
+      if (result.success) {
+        if (result.user.type === 'farmer') {
+          window.location.href = 'farmer-dashboard.html';
+        } else {
+          window.location.href = 'buyer-dashboard.html';
+        }
+      } else {
+        alert(result.message);
+      }
+    });
+  </script>
+</body>
+</html>

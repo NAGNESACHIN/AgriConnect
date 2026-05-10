@@ -1,0 +1,34 @@
+<form id="signupForm">
+  <input type="text" id="name" placeholder="Name" required>
+  <input type="email" id="email" placeholder="Email" required>
+  <input type="password" id="password" placeholder="Password" required>
+
+  <select id="type">
+    <option value="buyer">Buyer</option>
+    <option value="farmer">Farmer</option>
+  </select>
+
+  <button class="btn">Signup</button>
+</form>
+
+<script>
+const form = document.getElementById("signupForm");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const result = await auth.signup(
+    document.getElementById("name").value,
+    document.getElementById("email").value,
+    document.getElementById("password").value,
+    document.getElementById("type").value
+  );
+
+  if(result.success){
+    alert("Signup successful");
+    window.location.href = "login.html";
+  } else {
+    alert(result.message);
+  }
+});
+</script>
