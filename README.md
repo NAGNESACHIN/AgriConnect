@@ -1,6 +1,6 @@
 # AgriConnect
 
-A simple agriculture marketplace starter project.
+A simple agriculture marketplace  project.
 
 ## Structure
 
