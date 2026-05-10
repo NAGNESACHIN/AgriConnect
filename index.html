@@ -5,14 +5,116 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AgriConnect</title>
 
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: #e6f7e6; /* light green background */
+    }
+
+    /* Navbar */
+    nav {
+      background: #2e7d32;
+      color: #fff;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav h2 {
+      margin: 0;
+      font-weight: 700;
+    }
+    nav div a {
+      color: #fff;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    nav div a:hover {
+      text-decoration: underline;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      color: #2e7d32;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin: 20px 0;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      margin: 10px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .btn-primary {
+      background: #2e7d32;
+      color: #fff;
+    }
+    .btn-secondary {
+      background: #fff;
+      color: #2e7d32;
+      border: 2px solid #2e7d32;
+    }
+
+    /* Features */
+    .features {
+      padding: 60px 30px;
+      text-align: center;
+    }
+    .features h2 {
+      margin-bottom: 30px;
+      color: #2e7d32;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .feature-card {
+      background: #f0fff0;
+      padding: 25px;
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    .feature-card i {
+      font-size: 2rem;
+      color: #2e7d32;
+      margin-bottom: 15px;
+    }
+
+    /* Footer */
+    footer {
+      background: #212529;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
 </head>
 <body>
 
   <!-- NAVBAR -->
   <nav>
-    <h2>AgriConnect</h2>
-
+    <h2><i class="fas fa-seedling"></i> AgriConnect</h2>
     <div>
       <a href="#home">Home</a>
       <a href="#solution">Solution</a>
@@ -27,11 +129,46 @@
   <section class="hero" id="home">
     <div class="container">
       <h1>Digital Agriculture Marketplace</h1>
+      <p>Connecting Farmers and Buyers Through Smart Agriculture Technology.</p>
+      <div>
+        <a class="btn btn-primary" href="pages/signup.html">Get Started</a>
+        <a class="btn btn-secondary" href="#features">Learn More</a>
+      </div>
+    </div>
+  </section>
 
-      <p>
-        Connecting Farmers and Buyers Through Smart Agriculture Technology.
-      </p>
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <h2>Why Choose AgriConnect?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <i class="fas fa-handshake"></i>
+        <h3>Fair Trade</h3>
+        <p>Farmers earn more by selling directly to buyers.</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-leaf"></i>
+        <h3>Fresh Produce</h3>
+        <p>Buyers get farm-fresh crops instantly.</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-shipping-fast"></i>
+        <h3>Fast Delivery</h3>
+        <p>Quick pickup and delivery within 24 hours.</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-mobile-alt"></i>
+        <h3>Mobile App</h3>
+        <p>Sell and buy anytime, anywhere.</p>
+      </div>
+    </div>
+  </section>
 
-      <div style="margin-top:30px;">
-        <a class="btn" href="pages/signup.html">Get Started</a>
+  <!-- FOOTER -->
+  <footer id="contact">
+    <p>© 2026 AgriConnect | Empowering Farmers with Direct Market Access</p>
+    <p><i class="fas fa-envelope"></i> contact@agriconnect.com</p>
+  </footer>
+
+</body>
 </html>
