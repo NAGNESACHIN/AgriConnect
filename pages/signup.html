@@ -1,34 +1,416 @@
-<form id="signupForm">
-  <input type="text" id="name" placeholder="Name" required>
-  <input type="email" id="email" placeholder="Email" required>
-  <input type="password" id="password" placeholder="Password" required>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgriConnect Signup</title>
 
-  <select id="type">
-    <option value="buyer">Buyer</option>
-    <option value="farmer">Farmer</option>
-  </select>
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <button class="btn">Signup</button>
-</form>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-<script>
-const form = document.getElementById("signupForm");
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+    :root{
+      --primary:#2e7d32;
+      --secondary:#43a047;
+      --white:#fff;
+      --dark:#122013;
+      --shadow:0 10px 30px rgba(0,0,0,0.15);
+    }
 
-  const result = await auth.signup(
-    document.getElementById("name").value,
-    document.getElementById("email").value,
-    document.getElementById("password").value,
-    document.getElementById("type").value
-  );
+    body{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+      linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55)),
+      url('https://images.unsplash.com/photo-1464226184884-fa280b87c399?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+      padding:20px;
+      overflow:hidden;
+    }
 
-  if(result.success){
-    alert("Signup successful");
-    window.location.href = "login.html";
-  } else {
-    alert(result.message);
-  }
-});
-</script>
+    .blur1,
+    .blur2{
+      position:absolute;
+      border-radius:50%;
+      filter:blur(120px);
+      animation:float 6s infinite alternate ease-in-out;
+    }
+
+    .blur1{
+      width:320px;
+      height:320px;
+      background:rgba(67,160,71,0.35);
+      top:-100px;
+      left:-100px;
+    }
+
+    .blur2{
+      width:280px;
+      height:280px;
+      background:rgba(139,195,74,0.3);
+      bottom:-80px;
+      right:-80px;
+    }
+
+    @keyframes float{
+      from{transform:translateY(0px)}
+      to{transform:translateY(25px)}
+    }
+
+    .signup-container{
+      width:100%;
+      max-width:1100px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      background:rgba(255,255,255,0.1);
+      backdrop-filter:blur(18px);
+      border-radius:30px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.15);
+      box-shadow:var(--shadow);
+      animation:fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(30px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    /* Left */
+    .left-side{
+      color:white;
+      padding:60px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:1.8rem;
+      font-weight:700;
+      margin-bottom:25px;
+    }
+
+    .logo i{
+      color:#9ccc65;
+    }
+
+    .left-side h1{
+      font-size:3rem;
+      line-height:1.2;
+      margin-bottom:20px;
+    }
+
+    .left-side p{
+      line-height:1.9;
+      color:#f0f0f0;
+      margin-bottom:35px;
+    }
+
+    .info-box{
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    .info-item{
+      display:flex;
+      align-items:center;
+      gap:15px;
+    }
+
+    .info-item i{
+      width:42px;
+      height:42px;
+      display:grid;
+      place-items:center;
+      border-radius:12px;
+      background:rgba(255,255,255,0.15);
+    }
+
+    /* Right */
+    .right-side{
+      background:white;
+      padding:55px 45px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .signup-box{
+      width:100%;
+      max-width:420px;
+    }
+
+    .signup-box h2{
+      font-size:2rem;
+      margin-bottom:10px;
+      color:var(--dark);
+    }
+
+    .signup-box p{
+      color:#666;
+      margin-bottom:30px;
+    }
+
+    .input-group{
+      margin-bottom:20px;
+      position:relative;
+    }
+
+    .input-group label{
+      display:block;
+      margin-bottom:8px;
+      font-weight:500;
+    }
+
+    .input-group input,
+    .input-group select{
+      width:100%;
+      padding:15px 18px 15px 48px;
+      border:2px solid #e5e5e5;
+      border-radius:14px;
+      outline:none;
+      transition:0.3s;
+      font-size:1rem;
+      background:white;
+    }
+
+    .input-group input:focus,
+    .input-group select:focus{
+      border-color:var(--primary);
+      box-shadow:0 0 0 4px rgba(46,125,50,0.12);
+    }
+
+    .input-group i{
+      position:absolute;
+      top:47px;
+      left:16px;
+      color:#777;
+    }
+
+    .signup-btn{
+      width:100%;
+      padding:15px;
+      border:none;
+      border-radius:14px;
+      background:linear-gradient(135deg,#1b5e20,#43a047);
+      color:white;
+      font-size:1rem;
+      font-weight:600;
+      cursor:pointer;
+      transition:0.3s;
+      box-shadow:0 10px 25px rgba(46,125,50,0.25);
+      margin-top:10px;
+    }
+
+    .signup-btn:hover{
+      transform:translateY(-3px);
+    }
+
+    .divider{
+      display:flex;
+      align-items:center;
+      gap:15px;
+      margin:25px 0;
+      color:#777;
+      font-size:0.9rem;
+    }
+
+    .divider::before,
+    .divider::after{
+      content:'';
+      flex:1;
+      height:1px;
+      background:#ddd;
+    }
+
+    .social-buttons{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:15px;
+    }
+
+    .social-btn{
+      padding:13px;
+      border-radius:14px;
+      border:2px solid #e5e5e5;
+      background:white;
+      cursor:pointer;
+      font-weight:600;
+      transition:0.3s;
+    }
+
+    .social-btn:hover{
+      border-color:var(--primary);
+      transform:translateY(-2px);
+    }
+
+    .login-link{
+      text-align:center;
+      margin-top:28px;
+      color:#666;
+    }
+
+    .login-link a{
+      text-decoration:none;
+      color:var(--primary);
+      font-weight:700;
+    }
+
+    @media(max-width:900px){
+      .signup-container{
+        grid-template-columns:1fr;
+      }
+
+      .left-side{
+        display:none;
+      }
+
+      .right-side{
+        padding:45px 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="blur1"></div>
+  <div class="blur2"></div>
+
+  <div class="signup-container">
+
+    <!-- Left -->
+    <div class="left-side">
+
+      <div class="logo">
+        <i class="fa-solid fa-seedling"></i>
+        AgriConnect
+      </div>
+
+      <h1>Join The Future Of Farming 🚜</h1>
+
+      <p>
+        Create your AgriConnect account and start buying,
+        selling, and managing crops digitally with ease.
+      </p>
+
+      <div class="info-box">
+
+        <div class="info-item">
+          <i class="fa-solid fa-handshake"></i>
+          Direct Farmer To Buyer Marketplace
+        </div>
+
+        <div class="info-item">
+          <i class="fa-solid fa-chart-line"></i>
+          Live Crop Price Insights
+        </div>
+
+        <div class="info-item">
+          <i class="fa-solid fa-mobile-screen-button"></i>
+          Access Anytime Anywhere
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Right -->
+    <div class="right-side">
+
+      <div class="signup-box">
+
+        <h2>Create Account</h2>
+        <p>Start your digital farming journey today</p>
+
+        <form>
+
+          <div class="input-group">
+            <label>Full Name</label>
+            <i class="fa-solid fa-user"></i>
+            <input type="text" placeholder="Enter your full name" required>
+          </div>
+
+          <div class="input-group">
+            <label>Email Address</label>
+            <i class="fa-solid fa-envelope"></i>
+            <input type="email" placeholder="Enter your email" required>
+          </div>
+
+          <div class="input-group">
+            <label>User Type</label>
+            <i class="fa-solid fa-users"></i>
+            <select required>
+              <option value="">Select user type</option>
+              <option>Farmer</option>
+              <option>Buyer</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label>Password</label>
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" placeholder="Create password" required>
+          </div>
+
+          <div class="input-group">
+            <label>Confirm Password</label>
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" placeholder="Confirm password" required>
+          </div>
+
+          <button class="signup-btn" type="submit">
+            <i class="fa-solid fa-user-plus"></i>
+            Create Account
+          </button>
+
+        </form>
+
+        <div class="divider">OR SIGNUP WITH</div>
+
+        <div class="social-buttons">
+          <button class="social-btn">
+            <i class="fab fa-google"></i> Google
+          </button>
+
+          <button class="social-btn">
+            <i class="fab fa-facebook-f"></i> Facebook
+          </button>
+        </div>
+
+        <div class="login-link">
+          Already have an account?
+          <a href="login.html">Login</a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

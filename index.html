@@ -3,172 +3,691 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AgriConnect</title>
+  <title>AgriConnect | Smart Farming Marketplace</title>
 
-  <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Custom CSS -->
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --primary: #2e7d32;
+      --secondary: #43a047;
+      --light: #f4fff4;
+      --dark: #112b12;
+      --text: #555;
+      --white: #ffffff;
+      --shadow: 0 10px 30px rgba(0,0,0,0.12);
+      --gradient: linear-gradient(135deg,#1b5e20,#43a047);
+    }
+
     body {
       font-family: 'Poppins', sans-serif;
-      margin: 0;
-      background-color: #e6f7e6; /* light green background */
+      background: var(--light);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1200px, 90%);
+      margin: auto;
     }
 
     /* Navbar */
-    nav {
-      background: #2e7d32;
-      color: #fff;
-      padding: 15px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(12px);
+      background: rgba(17, 43, 18, 0.9);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
     }
-    nav h2 {
-      margin: 0;
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--white);
+      font-size: 1.5rem;
       font-weight: 700;
     }
-    nav div a {
-      color: #fff;
-      margin-left: 20px;
+
+    .logo i {
+      color: #8bc34a;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--white);
       text-decoration: none;
       font-weight: 500;
+      position: relative;
+      transition: 0.3s;
     }
-    nav div a:hover {
-      text-decoration: underline;
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0;
+      height: 2px;
+      background: #8bc34a;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .menu-btn {
+      display: none;
+      font-size: 1.5rem;
+      color: white;
+      cursor: pointer;
     }
 
     /* Hero */
     .hero {
-      text-align: center;
-      padding: 80px 20px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+      color: white;
+      position: relative;
     }
+
+    .hero-content {
+      max-width: 700px;
+      animation: fadeUp 1s ease;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 18px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(10px);
+    }
+
     .hero h1 {
-      font-size: 3rem;
-      color: #2e7d32;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      line-height: 1.1;
+      margin-bottom: 20px;
     }
+
     .hero p {
-      font-size: 1.2rem;
-      margin: 20px 0;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 35px;
+      color: #f0f0f0;
     }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
     .btn {
-      display: inline-block;
-      padding: 12px 25px;
-      margin: 10px;
-      border-radius: 5px;
+      padding: 14px 28px;
+      border-radius: 50px;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
     }
+
     .btn-primary {
-      background: #2e7d32;
-      color: #fff;
+      background: var(--white);
+      color: var(--primary);
+      box-shadow: var(--shadow);
     }
-    .btn-secondary {
-      background: #fff;
-      color: #2e7d32;
-      border: 2px solid #2e7d32;
+
+    .btn-primary:hover {
+      transform: translateY(-4px);
+    }
+
+    .btn-outline {
+      border: 2px solid white;
+      color: white;
+    }
+
+    .btn-outline:hover {
+      background: white;
+      color: var(--primary);
+    }
+
+    /* Stats */
+    .stats {
+      margin-top: -70px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap: 24px;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 30px;
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: 0.4s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .stat-card h2 {
+      font-size: 2.4rem;
+      color: var(--primary);
+    }
+
+    .stat-card p {
+      color: var(--text);
+      margin-top: 8px;
+    }
+
+    /* Section Common */
+    section {
+      padding: 100px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 15px;
+    }
+
+    .section-title p {
+      color: var(--text);
+      max-width: 700px;
+      margin: auto;
+      line-height: 1.8;
     }
 
     /* Features */
-    .features {
-      padding: 60px 30px;
-      text-align: center;
-    }
-    .features h2 {
-      margin-bottom: 30px;
-      color: #2e7d32;
-    }
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 28px;
     }
+
     .feature-card {
-      background: #f0fff0;
-      padding: 25px;
-      border-radius: 10px;
-      transition: 0.3s;
+      background: white;
+      padding: 35px;
+      border-radius: 28px;
+      transition: 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
     }
+
+    .feature-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--gradient);
+      opacity: 0;
+      transition: 0.4s;
+      z-index: 0;
+    }
+
+    .feature-card:hover::before {
+      opacity: 1;
+    }
+
     .feature-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      transform: translateY(-10px);
+      color: white;
     }
-    .feature-card i {
-      font-size: 2rem;
-      color: #2e7d32;
-      margin-bottom: 15px;
+
+    .feature-card * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .feature-icon {
+      width: 70px;
+      height: 70px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background: rgba(46,125,50,0.1);
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      color: var(--primary);
+      transition: 0.4s;
+    }
+
+    .feature-card:hover .feature-icon {
+      background: rgba(255,255,255,0.2);
+      color: white;
+    }
+
+    .feature-card p {
+      margin-top: 14px;
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    .feature-card:hover p {
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* CTA */
+    .cta {
+      background: var(--gradient);
+      color: white;
+      border-radius: 40px;
+      padding: 70px 50px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .cta h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 20px;
+    }
+
+    .cta p {
+      max-width: 700px;
+      margin: auto auto 30px;
+      line-height: 1.8;
     }
 
     /* Footer */
     footer {
-      background: #212529;
-      color: #fff;
+      background: #0d1f0e;
+      color: white;
+      padding: 70px 0 30px;
+      margin-top: 100px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-col h3 {
+      margin-bottom: 20px;
+    }
+
+    .footer-col p,
+    .footer-col a {
+      color: #cfd8dc;
+      text-decoration: none;
+      line-height: 2;
+    }
+
+    .socials {
+      display: flex;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .socials a {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: grid;
+      place-items: center;
+      transition: 0.3s;
+    }
+
+    .socials a:hover {
+      background: var(--secondary);
+      transform: translateY(-4px);
+    }
+
+    .copyright {
       text-align: center;
-      padding: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: #b0bec5;
+    }
+
+    /* Animation */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media(max-width: 850px) {
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #173918;
+        flex-direction: column;
+        padding: 20px;
+        display: none;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .hero {
+        text-align: center;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .cta {
+        padding: 50px 25px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <nav>
-    <h2><i class="fas fa-seedling"></i> AgriConnect</h2>
-    <div>
-      <a href="#home">Home</a>
-      <a href="#solution">Solution</a>
-      <a href="#features">Features</a>
-      <a href="#contact">Contact</a>
-      <a href="pages/login.html">Login</a>
-      <a href="pages/signup.html">Signup</a>
-    </div>
-  </nav>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <i class="fa-solid fa-seedling"></i>
+          AgriConnect
+        </div>
 
-  <!-- HERO -->
+        <div class="nav-links" id="navLinks">
+          <a href="#home">Home</a>
+          <a href="#features">Features</a>
+          <a href="./pages/marketplace.html">Marketplace</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+         <a href="./pages/login.html" class="btn btn-outline">Login</a>
+         <a href="./pages/signup.html">Signup</a>
+        </div>
+
+        <div class="menu-btn" id="menuBtn">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
   <section class="hero" id="home">
     <div class="container">
-      <h1>Digital Agriculture Marketplace</h1>
-      <p>Connecting Farmers and Buyers Through Smart Agriculture Technology.</p>
-      <div>
-        <a class="btn btn-primary" href="pages/signup.html">Get Started</a>
-        <a class="btn btn-secondary" href="#features">Learn More</a>
+      <div class="hero-content">
+
+        <div class="hero-badge">
+          <i class="fa-solid fa-leaf"></i>
+          Smart Farming Platform
+        </div>
+
+        <h1>Connecting Farmers Directly With Buyers</h1>
+
+        <p>
+          AgriConnect helps farmers sell products without middlemen.
+          Buyers get fresh produce, transparent pricing, and fast delivery.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#" class="btn btn-primary">
+            <i class="fa-solid fa-rocket"></i>
+            Get Started
+          </a>
+
+          <a href="#features" class="btn btn-outline">
+            <i class="fa-solid fa-circle-play"></i>
+            Explore Features
+          </a>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- FEATURES -->
-  <section class="features" id="features">
-    <h2>Why Choose AgriConnect?</h2>
-    <div class="features-grid">
-      <div class="feature-card">
-        <i class="fas fa-handshake"></i>
-        <h3>Fair Trade</h3>
-        <p>Farmers earn more by selling directly to buyers.</p>
-      </div>
-      <div class="feature-card">
-        <i class="fas fa-leaf"></i>
-        <h3>Fresh Produce</h3>
-        <p>Buyers get farm-fresh crops instantly.</p>
-      </div>
-      <div class="feature-card">
-        <i class="fas fa-shipping-fast"></i>
-        <h3>Fast Delivery</h3>
-        <p>Quick pickup and delivery within 24 hours.</p>
-      </div>
-      <div class="feature-card">
-        <i class="fas fa-mobile-alt"></i>
-        <h3>Mobile App</h3>
-        <p>Sell and buy anytime, anywhere.</p>
+  <!-- Stats -->
+  <section class="stats">
+    <div class="container">
+      <div class="stats-grid">
+
+        <div class="stat-card">
+          <h2>5K+</h2>
+          <p>Farmers Connected</p>
+        </div>
+
+        <div class="stat-card">
+          <h2>20K+</h2>
+          <p>Orders Delivered</p>
+        </div>
+
+        <div class="stat-card">
+          <h2>98%</h2>
+          <p>Customer Satisfaction</p>
+        </div>
+
+        <div class="stat-card">
+          <h2>24/7</h2>
+          <p>Support Available</p>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- Features -->
+  <section id="features">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Why Choose AgriConnect?</h2>
+        <p>
+          A complete agriculture marketplace platform built for modern farmers and smart buyers.
+        </p>
+      </div>
+
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fa-solid fa-handshake"></i>
+          </div>
+          <h3>Fair Trade System</h3>
+          <p>
+            Farmers earn higher profits by selling directly to customers without middlemen.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fa-solid fa-truck-fast"></i>
+          </div>
+          <h3>Fast Delivery</h3>
+          <p>
+            Smart logistics ensure fresh products are delivered quickly and safely.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+          </div>
+          <h3>Mobile Friendly</h3>
+          <p>
+            Fully responsive design that works smoothly across mobile, tablet, and desktop.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fa-solid fa-chart-line"></i>
+          </div>
+          <h3>Live Market Prices</h3>
+          <p>
+            Farmers can track market trends and decide the best time to sell crops.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <div class="cta">
+        <h2>Empowering Farmers Through Technology</h2>
+        <p>
+          AgriConnect is not just a marketplace — it's a digital ecosystem helping rural farmers grow their business and connect with modern consumers.
+        </p>
+
+        <a href="#" class="btn btn-primary">
+          <i class="fa-solid fa-user-plus"></i>
+          Join The Platform
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer id="contact">
-    <p>© 2026 AgriConnect | Empowering Farmers with Direct Market Access</p>
-    <p><i class="fas fa-envelope"></i> contact@agriconnect.com</p>
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div class="footer-col">
+          <h3>AgriConnect</h3>
+          <p>
+            Smart agriculture marketplace connecting farmers and buyers digitally.
+          </p>
+
+          <div class="socials">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-x-twitter"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <a href="#home">Home</a><br>
+          <a href="#features">Features</a><br>
+          <a href="#about">About</a><br>
+          <a href="#contact">Contact</a>
+        </div>
+
+        <div class="footer-col">
+          <h3>Services</h3>
+          <p>Crop Marketplace</p>
+          <p>Smart Logistics</p>
+          <p>Market Analytics</p>
+          <p>Farmer Support</p>
+        </div>
+
+        <div class="footer-col">
+          <h3>Contact</h3>
+          <p><i class="fa-solid fa-envelope"></i> support@agriconnect.com</p>
+          <p><i class="fa-solid fa-phone"></i> +91 98765 43210</p>
+          <p><i class="fa-solid fa-location-dot"></i> Maharashtra, India</p>
+        </div>
+
+      </div>
+
+      <div class="copyright">
+        © 2026 AgriConnect • Designed for the Future of Agriculture 🌱
+      </div>
+
+    </div>
   </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Scroll animation
+    const cards = document.querySelectorAll('.feature-card, .stat-card');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+
+    cards.forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(40px)';
+      card.style.transition = '0.7s ease';
+      observer.observe(card);
+    });
+  </script>
 
 </body>
 </html>

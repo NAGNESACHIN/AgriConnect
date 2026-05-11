@@ -1,48 +1,420 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login | AgriConnect</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriConnect Login</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    :root{
+      --primary:#2e7d32;
+      --secondary:#43a047;
+      --light:#f4fff4;
+      --dark:#122013;
+      --white:#fff;
+      --shadow:0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    body{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+      linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55)),
+      url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+      overflow:hidden;
+      padding:20px;
+    }
+
+    .background-blur{
+      position:absolute;
+      width:350px;
+      height:350px;
+      background:rgba(67,160,71,0.35);
+      filter:blur(120px);
+      border-radius:50%;
+      top:-100px;
+      left:-100px;
+      animation:float 6s infinite ease-in-out alternate;
+    }
+
+    .background-blur2{
+      position:absolute;
+      width:300px;
+      height:300px;
+      background:rgba(139,195,74,0.3);
+      filter:blur(120px);
+      border-radius:50%;
+      bottom:-80px;
+      right:-80px;
+      animation:float 7s infinite ease-in-out alternate;
+    }
+
+    @keyframes float{
+      from{
+        transform:translateY(0px);
+      }
+      to{
+        transform:translateY(25px);
+      }
+    }
+
+    .login-container{
+      width:100%;
+      max-width:1050px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      background:rgba(255,255,255,0.1);
+      backdrop-filter:blur(18px);
+      border:1px solid rgba(255,255,255,0.15);
+      border-radius:30px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      animation:fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(30px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    /* Left Side */
+    .login-left{
+      padding:60px;
+      color:white;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      position:relative;
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:1.7rem;
+      font-weight:700;
+      margin-bottom:25px;
+    }
+
+    .logo i{
+      color:#9ccc65;
+    }
+
+    .login-left h1{
+      font-size:3rem;
+      line-height:1.2;
+      margin-bottom:20px;
+    }
+
+    .login-left p{
+      line-height:1.9;
+      color:#f0f0f0;
+      margin-bottom:30px;
+    }
+
+    .feature-list{
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    .feature-item{
+      display:flex;
+      align-items:center;
+      gap:15px;
+      font-size:1rem;
+    }
+
+    .feature-item i{
+      width:42px;
+      height:42px;
+      display:grid;
+      place-items:center;
+      border-radius:12px;
+      background:rgba(255,255,255,0.15);
+    }
+
+    /* Right Side */
+    .login-right{
+      background:white;
+      padding:60px 50px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .login-box{
+      width:100%;
+      max-width:380px;
+    }
+
+    .login-box h2{
+      color:var(--dark);
+      font-size:2rem;
+      margin-bottom:10px;
+    }
+
+    .login-box .subtitle{
+      color:#666;
+      margin-bottom:35px;
+    }
+
+    .input-group{
+      margin-bottom:22px;
+      position:relative;
+    }
+
+    .input-group label{
+      display:block;
+      margin-bottom:8px;
+      font-weight:500;
+      color:#333;
+    }
+
+    .input-group input{
+      width:100%;
+      padding:15px 18px 15px 48px;
+      border:2px solid #e0e0e0;
+      border-radius:14px;
+      font-size:1rem;
+      transition:0.3s;
+      outline:none;
+    }
+
+    .input-group input:focus{
+      border-color:var(--primary);
+      box-shadow:0 0 0 4px rgba(46,125,50,0.12);
+    }
+
+    .input-group i{
+      position:absolute;
+      left:16px;
+      top:47px;
+      color:#777;
+    }
+
+    .row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:25px;
+      font-size:0.95rem;
+    }
+
+    .row a{
+      text-decoration:none;
+      color:var(--primary);
+      font-weight:600;
+    }
+
+    .login-btn{
+      width:100%;
+      padding:15px;
+      border:none;
+      border-radius:14px;
+      background:linear-gradient(135deg,#1b5e20,#43a047);
+      color:white;
+      font-size:1rem;
+      font-weight:600;
+      cursor:pointer;
+      transition:0.3s ease;
+      box-shadow:0 10px 25px rgba(46,125,50,0.25);
+    }
+
+    .login-btn:hover{
+      transform:translateY(-3px);
+    }
+
+    .divider{
+      display:flex;
+      align-items:center;
+      gap:15px;
+      margin:28px 0;
+      color:#777;
+      font-size:0.9rem;
+    }
+
+    .divider::before,
+    .divider::after{
+      content:'';
+      flex:1;
+      height:1px;
+      background:#ddd;
+    }
+
+    .social-login{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:15px;
+    }
+
+    .social-btn{
+      padding:13px;
+      border:2px solid #e5e5e5;
+      border-radius:14px;
+      background:white;
+      cursor:pointer;
+      font-weight:600;
+      transition:0.3s;
+    }
+
+    .social-btn:hover{
+      border-color:var(--primary);
+      transform:translateY(-2px);
+    }
+
+    .signup-text{
+      text-align:center;
+      margin-top:28px;
+      color:#666;
+    }
+
+    .signup-text a{
+      text-decoration:none;
+      color:var(--primary);
+      font-weight:700;
+    }
+
+    @media(max-width:900px){
+      .login-container{
+        grid-template-columns:1fr;
+      }
+
+      .login-left{
+        display:none;
+      }
+
+      .login-right{
+        padding:45px 25px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="form-page">
-    <div class="form-card">
-      <h1>Login</h1>
-      <p>Access your AgriConnect account.</p>
-      <form id="loginForm">
-        <label for="email">Email</label>
-        <input id="email" type="email" required>
 
-        <label for="password">Password</label>
-        <input id="password" type="password" required>
+  <div class="background-blur"></div>
+  <div class="background-blur2"></div>
 
-        <button class="btn" type="submit">Sign In</button>
-      </form>
-      <p style="margin-top:18px; color:#6b7280;">New here? <a href="signup.html">Create an account</a></p>
+  <div class="login-container">
+
+    <!-- Left -->
+    <div class="login-left">
+
+      <div class="logo">
+        <i class="fa-solid fa-seedling"></i>
+        AgriConnect
+      </div>
+
+      <h1>Welcome Back Farmer 🌱</h1>
+
+      <p>
+        Login to manage crops, connect with buyers,
+        track orders, and grow your farming business digitally.
+      </p>
+
+      <div class="feature-list">
+
+        <div class="feature-item">
+          <i class="fa-solid fa-chart-line"></i>
+          Live Market Price Updates
+        </div>
+
+        <div class="feature-item">
+          <i class="fa-solid fa-truck-fast"></i>
+          Fast Delivery Tracking
+        </div>
+
+        <div class="feature-item">
+          <i class="fa-solid fa-mobile-screen-button"></i>
+          Access Anywhere Anytime
+        </div>
+
+      </div>
+
     </div>
+
+    <!-- Right -->
+    <div class="login-right">
+
+      <div class="login-box">
+
+        <h2>Login Account</h2>
+        <p class="subtitle">Please login to continue</p>
+
+        <form>
+
+          <div class="input-group">
+            <label>Email Address</label>
+            <i class="fa-solid fa-envelope"></i>
+            <input type="email" placeholder="Enter your email" required>
+          </div>
+
+          <div class="input-group">
+            <label>Password</label>
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" placeholder="Enter your password" required>
+          </div>
+
+          <div class="row">
+            <label>
+              <input type="checkbox"> Remember me
+            </label>
+
+            <a href="#">Forgot Password?</a>
+          </div>
+
+          <button class="login-btn" type="submit">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            Login Now
+          </button>
+
+        </form>
+
+        <div class="divider">OR CONTINUE WITH</div>
+
+        <div class="social-login">
+          <button class="social-btn">
+            <i class="fab fa-google"></i> Google
+          </button>
+
+          <button class="social-btn">
+            <i class="fab fa-facebook-f"></i> Facebook
+          </button>
+        </div>
+
+        <div class="signup-text">
+          Don't have an account?
+          <a href="#">Create Account</a>
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
 
-  <script src="../assets/js/auth.js"></script>
-  <script>
-    const loginForm = document.getElementById('loginForm');
-    loginForm.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value;
-      const result = await auth.login(email, password);
-
-      if (result.success) {
-        if (result.user.type === 'farmer') {
-          window.location.href = 'farmer-dashboard.html';
-        } else {
-          window.location.href = 'buyer-dashboard.html';
-        }
-      } else {
-        alert(result.message);
-      }
-    });
-  </script>
 </body>
 </html>

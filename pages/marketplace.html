@@ -1,55 +1,195 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marketplace | AgriConnect</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <title>Simple Marketplace</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      background:#f4fff4;
+      color:#222;
+    }
+
+    nav{
+      background:#2e7d32;
+      color:white;
+      padding:18px 8%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    nav h2{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    nav a{
+      color:white;
+      text-decoration:none;
+      margin-left:20px;
+    }
+
+    .hero{
+      text-align:center;
+      padding:60px 20px;
+      background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
+      url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=1600&auto=format&fit=crop') center/cover;
+      color:white;
+    }
+
+    .search-box{
+      width:90%;
+      max-width:500px;
+      margin:30px auto;
+      display:flex;
+    }
+
+    .search-box input{
+      flex:1;
+      padding:14px;
+      border:none;
+      outline:none;
+      border-radius:10px 0 0 10px;
+    }
+
+    .search-box button{
+      padding:14px 20px;
+      border:none;
+      background:#2e7d32;
+      color:white;
+      border-radius:0 10px 10px 0;
+      cursor:pointer;
+    }
+
+    .products{
+      width:90%;
+      margin:auto;
+      padding:50px 0;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:25px;
+    }
+
+    .card{
+      background:white;
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 5px 15px rgba(0,0,0,0.1);
+      transition:0.3s;
+    }
+
+    .card:hover{
+      transform:translateY(-8px);
+    }
+
+    .card img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+    }
+
+    .card-content{
+      padding:20px;
+    }
+
+    .price{
+      color:#2e7d32;
+      font-weight:700;
+      margin:10px 0;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:10px 18px;
+      background:#2e7d32;
+      color:white;
+      text-decoration:none;
+      border-radius:8px;
+    }
+
+    footer{
+      text-align:center;
+      padding:25px;
+      background:#122013;
+      color:white;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <nav>
-        <div>
-          <a href="../index.html" class="btn">AgriConnect</a>
-        </div>
-        <div class="nav-links">
-          <a href="../pages/login.html">Login</a>
-          <a href="../pages/signup.html">Signup</a>
-        </div>
-      </nav>
-    </header>
 
-    <section class="hero">
-      <h1>Marketplace</h1>
-      <p>Browse fresh farm produce from local growers and make purchases in a few clicks.</p>
-    </section>
+  <nav>
+    <h2><i class="fa-solid fa-seedling"></i> AgriConnect</h2>
 
-    <section>
-      <div class="section-title">Featured products</div>
-      <div class="product-grid">
-        <article class="product-card">
-          <h3>Premium Wheat</h3>
-          <small>Cereals</small>
-          <span class="price">$25 / kg</span>
-          <p>High quality winter wheat, perfect for flour and baking.</p>
-        </article>
+    <div>
+      <a href="../index.html">Home</a>
+      <a href="login.html">Login</a>
+    </div>
+  </nav>
 
-        <article class="product-card">
-          <h3>Golden Rice</h3>
-          <small>Cereals</small>
-          <span class="price">$18 / kg</span>
-          <p>Fragrant basmati rice, ideal for every kitchen.</p>
-        </article>
+  <section class="hero">
+    <h1>Fresh Farm Products</h1>
+    <p>Buy directly from trusted farmers</p>
 
-        <article class="product-card">
-          <h3>Fresh Maize</h3>
-          <small>Cereals</small>
-          <span class="price">$15 / kg</span>
-          <p>Sweet yellow corn, nutritious and ready to cook.</p>
-        </article>
+    <div class="search-box">
+      <input type="text" placeholder="Search crops...">
+      <button><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+  </section>
+
+  <section class="products">
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?q=80&w=1200&auto=format&fit=crop">
+
+      <div class="card-content">
+        <h3>Fresh Tomatoes</h3>
+        <p>Organic farm tomatoes</p>
+        <div class="price">₹40 / Kg</div>
+        <a href="#" class="btn">Buy Now</a>
       </div>
-    </section>
-  </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?q=80&w=800&auto=format&fit=crop">
+
+      <div class="card-content">
+        <h3>Wheat</h3>
+        <p>Premium quality wheat</p>
+        <div class="price">₹55 / Kg</div>
+        <a href="#" class="btn">Buy Now</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=800&auto=format&fit=crop">
+
+      <div class="card-content">
+        <h3>Onions</h3>
+        <p>Fresh onions directly from farms</p>
+        <div class="price">₹30 / Kg</div>
+        <a href="#" class="btn">Buy Now</a>
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    © 2026 AgriConnect Marketplace
+  </footer>
+
 </body>
 </html>
