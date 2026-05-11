@@ -411,6 +411,40 @@
     </div>
 
   </div>
+<script>
 
+const signupForm = document.querySelector("form");
+
+signupForm.addEventListener("submit", function(e){
+
+  e.preventDefault();
+
+  const name = document.querySelector('input[type="text"]').value;
+  const email = document.querySelector('input[type="email"]').value;
+  const userType = document.querySelector('select').value;
+  const password = document.querySelectorAll('input[type="password"]')[0].value;
+  const confirmPassword = document.querySelectorAll('input[type="password"]')[1].value;
+
+  if(password !== confirmPassword){
+    alert("Passwords do not match!");
+    return;
+  }
+
+  const user = {
+    name,
+    email,
+    userType,
+    password
+  };
+
+  localStorage.setItem("user", JSON.stringify(user));
+
+  alert("Signup Successful!");
+
+  window.location.href = "login.html";
+
+});
+
+</script>
 </body>
 </html>

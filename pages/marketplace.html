@@ -190,6 +190,50 @@
   <footer>
     © 2026 AgriConnect Marketplace
   </footer>
+<script>
 
+  const productSection = document.querySelector('.products');
+
+  let products = JSON.parse(localStorage.getItem('products')) || [];
+
+  products.forEach(product => {
+
+    productSection.innerHTML += `
+
+      <div class="card">
+
+        <img src="${product.image}">
+
+        <div class="card-content">
+
+          <h3>${product.name}</h3>
+
+          <p class="farmer">
+            <i class="fa-solid fa-user"></i>
+            Farmer: ${product.farmer}
+          </p>
+
+          <p>${product.desc}</p>
+
+          <div class="price-row">
+
+            <div class="price">
+              ₹${product.price} / Kg
+            </div>
+
+            <button class="buy-btn">
+              Buy Now
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    `;
+  });
+
+</script>
 </body>
 </html>
