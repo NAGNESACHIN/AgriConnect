@@ -294,6 +294,23 @@
       }
     }
   </style>
+  <style>
+    .auth-message {
+      min-height: 22px;
+      margin: 0 0 14px;
+      color: #c62828;
+      font-weight: 600;
+    }
+
+    .auth-message.success {
+      color: #2e7d32;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.75;
+    }
+  </style>
 </head>
 <body>
 
@@ -346,41 +363,43 @@
         <h2>Create Account</h2>
         <p>Start your digital farming journey today</p>
 
-        <form>
+        <form data-auth-form="signup">
 
           <div class="input-group">
             <label>Full Name</label>
             <i class="fa-solid fa-user"></i>
-            <input type="text" placeholder="Enter your full name" required>
+            <input type="text" name="name" placeholder="Enter your full name" required>
           </div>
 
           <div class="input-group">
             <label>Email Address</label>
             <i class="fa-solid fa-envelope"></i>
-            <input type="email" placeholder="Enter your email" required>
+            <input type="email" name="email" placeholder="Enter your email" required>
           </div>
 
           <div class="input-group">
             <label>User Type</label>
             <i class="fa-solid fa-users"></i>
-            <select required>
+            <select name="type" required>
               <option value="">Select user type</option>
-              <option>Farmer</option>
-              <option>Buyer</option>
+              <option value="Farmer">Farmer</option>
+              <option value="Buyer">Buyer</option>
             </select>
           </div>
 
           <div class="input-group">
             <label>Password</label>
             <i class="fa-solid fa-lock"></i>
-            <input type="password" placeholder="Create password" required>
+            <input type="password" name="password" placeholder="Create password" required>
           </div>
 
           <div class="input-group">
             <label>Confirm Password</label>
             <i class="fa-solid fa-lock"></i>
-            <input type="password" placeholder="Confirm password" required>
+            <input type="password" name="confirmPassword" placeholder="Confirm password" required>
           </div>
+
+          <p class="auth-message" data-auth-message></p>
 
           <button class="signup-btn" type="submit">
             <i class="fa-solid fa-user-plus"></i>
@@ -412,5 +431,6 @@
 
   </div>
 
+  <script src="../assets/js/auth.js"></script>
 </body>
 </html>

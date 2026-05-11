@@ -6,20 +6,21 @@
   <title>Farmer Dashboard | AgriConnect</title>
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
-<body>
+<body data-requires-auth="true">
   <div class="container">
     <header>
       <nav>
         <a href="../index.html" class="btn">Home</a>
         <div class="nav-links">
           <a href="marketplace.html">Marketplace</a>
-          <a href="login.html">Logout</a>
+          <a href="login.html" data-logout>Logout</a>
         </div>
       </nav>
     </header>
 
     <section class="hero">
       <h1>Farmer Dashboard</h1>
+      <p>Welcome, <strong data-user-name></strong>.</p>
       <p>Track your listings, manage stock, and connect with buyers.</p>
     </section>
 
@@ -34,5 +35,6 @@
       </div>
     </div>
   </div>
+  <script src="../assets/js/auth.js"></script>
 </body>
 </html>

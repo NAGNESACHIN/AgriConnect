@@ -312,6 +312,23 @@
       }
     }
   </style>
+  <style>
+    .auth-message {
+      min-height: 22px;
+      margin: 0 0 14px;
+      color: #c62828;
+      font-weight: 600;
+    }
+
+    .auth-message.success {
+      color: #2e7d32;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.75;
+    }
+  </style>
 </head>
 <body>
 
@@ -364,18 +381,18 @@
         <h2>Login Account</h2>
         <p class="subtitle">Please login to continue</p>
 
-        <form>
+        <form data-auth-form="login">
 
           <div class="input-group">
             <label>Email Address</label>
             <i class="fa-solid fa-envelope"></i>
-            <input type="email" placeholder="Enter your email" required>
+            <input type="email" name="email" placeholder="Enter your email" required>
           </div>
 
           <div class="input-group">
             <label>Password</label>
             <i class="fa-solid fa-lock"></i>
-            <input type="password" placeholder="Enter your password" required>
+            <input type="password" name="password" placeholder="Enter your password" required>
           </div>
 
           <div class="row">
@@ -385,6 +402,8 @@
 
             <a href="#">Forgot Password?</a>
           </div>
+
+          <p class="auth-message" data-auth-message></p>
 
           <button class="login-btn" type="submit">
             <i class="fa-solid fa-right-to-bracket"></i>
@@ -407,7 +426,7 @@
 
         <div class="signup-text">
           Don't have an account?
-          <a href="#">Create Account</a>
+          <a href="signup.html">Create Account</a>
         </div>
 
       </div>
@@ -416,5 +435,6 @@
 
   </div>
 
+  <script src="../assets/js/auth.js"></script>
 </body>
 </html>
