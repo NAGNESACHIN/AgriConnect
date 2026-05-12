@@ -196,7 +196,7 @@
 
   let products = JSON.parse(localStorage.getItem('products')) || [];
 
-  products.forEach(product => {
+  products.forEach((product,index) => {
 
     productSection.innerHTML += `
 
@@ -221,7 +221,7 @@
               ₹${product.price} / Kg
             </div>
 
-            <button class="buy-btn">
+            <button class="buy-btn" onclick="buyProduct(${index})">
               Buy Now
             </button>
 
@@ -233,6 +233,23 @@
 
     `;
   });
+
+</script>
+<script>
+
+function buyProduct(index){
+
+  let products = JSON.parse(localStorage.getItem('products')) || [];
+
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  cart.push(products[index]);
+
+  localStorage.setItem('cart', JSON.stringify(cart));
+
+  alert("Product Added To Cart 😄");
+
+}
 
 </script>
 </body>
