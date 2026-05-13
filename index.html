@@ -55,15 +55,20 @@
       top: 0;
       z-index: 1000;
       backdrop-filter: blur(12px);
-      background: rgba(17, 43, 18, 0.9);
+      background: var(--gradient);
       border-bottom: 1px solid rgba(255,255,255,0.1);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    header.hidden {
+      transform: translateY(-100%);
     }
 
     nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 18px 0;
+      padding: 10px 0;
     }
 
     .logo {
@@ -75,8 +80,13 @@
       font-weight: 700;
     }
 
+    .logo img {
+      height: 4em;
+      width: auto;
+    }
+
     .logo i {
-      color: #8bc34a;
+      color: #c6d4b6;
     }
 
     .nav-links {
@@ -111,7 +121,7 @@
     .menu-btn {
       display: none;
       font-size: 1.5rem;
-      color: white;
+      color: var(--white);
       cursor: pointer;
     }
 
@@ -450,7 +460,7 @@
     <div class="container">
       <nav>
         <div class="logo">
-          <i class="fa-solid fa-seedling"></i>
+          <img src="./assets/images/logo.png" alt="AgriConnect Logo">
           AgriConnect
         </div>
 
@@ -599,7 +609,7 @@
           AgriConnect is not just a marketplace — it's a digital ecosystem helping rural farmers grow their business and connect with modern consumers.
         </p>
 
-        <a href="#" class="btn btn-primary">
+        <a href="pages/signup.html" class="btn btn-primary">
           <i class="fa-solid fa-user-plus"></i>
           Join The Platform
         </a>
@@ -662,9 +672,24 @@
   <script>
     const menuBtn = document.getElementById('menuBtn');
     const navLinks = document.getElementById('navLinks');
+    const header = document.querySelector('header');
 
     menuBtn.addEventListener('click', () => {
       navLinks.classList.toggle('active');
+    });
+
+    // Hide header on scroll down, show on scroll up
+    let lastScrollTop = 0;
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      if (scrollTop > lastScrollTop && scrollTop > 100) {
+        // Scrolling down and past 100px
+        header.classList.add('hidden');
+      } else {
+        // Scrolling up
+        header.classList.remove('hidden');
+      }
+      lastScrollTop = scrollTop;
     });
 
     // Scroll animation
