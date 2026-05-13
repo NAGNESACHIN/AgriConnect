@@ -145,7 +145,7 @@
     <p>Buy directly from trusted farmers</p>
 
     <div class="search-box">
-      <input type="text" placeholder="Search crops...">
+      <input type="text" id="searchInput" placeholder="Search crops...">
       <button><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
   </section>
@@ -159,7 +159,9 @@
         <h3>Fresh Tomatoes</h3>
         <p>Organic farm tomatoes</p>
         <div class="price">₹40 / Kg</div>
-        <a href="#" class="btn">Buy Now</a>
+        <button class="btn" onclick="alert('Static Product 😄')">
+  Buy Now
+</button>
       </div>
     </div>
 
@@ -170,7 +172,9 @@
         <h3>Potato</h3>
         <p>Premium quality potato</p>
         <div class="price">₹55 / Kg</div>
-        <a href="#" class="btn">Buy Now</a>
+        <button class="btn" onclick="alert('Static Product 😄')">
+  Buy Now
+</button>
       </div>
     </div>
 
@@ -181,9 +185,75 @@
         <h3>RICE</h3>
         <p>Fresh RICE directly from farms</p>
         <div class="price">₹30 / Kg</div>
-        <a href="#" class="btn">Buy Now</a>
+        <button class="btn" onclick="alert('Static Product 😄')">
+  Buy Now
+</button>
       </div>
     </div>
+    <div class="card">
+  <img src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?q=80&w=1200&auto=format&fit=crop">
+
+  <div class="card-content">
+    <h3>Fresh Apples</h3>
+    <p>Directly from Kashmir farms</p>
+
+    <div class="price">
+      ₹120 / Kg
+    </div>
+
+    <button class="btn">
+      Buy Now
+    </button>
+  </div>
+</div>
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1553279768-865429fa0078?q=80&w=1200&auto=format&fit=crop">
+
+  <div class="card-content">
+    <h3>Organic Mango</h3>
+    <p>Sweet Alphonso mangoes</p>
+
+    <div class="price">
+      ₹150 / Dozen
+    </div>
+
+    <button class="btn">
+      Buy Now
+    </button>
+  </div>
+</div>
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?q=80&w=1200&auto=format&fit=crop">
+
+  <div class="card-content">
+    <h3>Fresh Onion</h3>
+    <p>Farm fresh red onions</p>
+
+    <div class="price">
+      ₹35 / Kg
+    </div>
+
+    <button class="btn">
+      Buy Now
+    </button>
+  </div>
+</div>
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=1200&auto=format&fit=crop">
+
+  <div class="card-content">
+    <h3>Organic Wheat</h3>
+    <p>Premium quality wheat grains</p>
+
+    <div class="price">
+      ₹50 / Kg
+    </div>
+
+    <button class="btn">
+      Buy Now
+    </button>
+  </div>
+</div>
 
   </section>
 
@@ -235,6 +305,7 @@
   });
 
 </script>
+
 <script>
 
 function buyProduct(index){
@@ -251,6 +322,33 @@ function buyProduct(index){
 
 }
 
+const searchInput = document.getElementById("searchInput");
+
+searchInput.addEventListener("keyup", function(){
+
+  let filter = searchInput.value.toLowerCase();
+
+  let cards = document.querySelectorAll(".card");
+
+  cards.forEach(card => {
+
+    let title = card.querySelector("h3").innerText.toLowerCase();
+
+    if(title.includes(filter)){
+
+      card.style.display = "block";
+
+    }else{
+
+      card.style.display = "none";
+
+    }
+
+  });
+
+});
+
 </script>
+
 </body>
 </html>
