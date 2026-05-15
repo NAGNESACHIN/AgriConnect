@@ -159,7 +159,7 @@
         <h3>Fresh Tomatoes</h3>
         <p>Organic farm tomatoes</p>
         <div class="price">₹40 / Kg</div>
-        <button class="btn" onclick="alert('Static Product 😄')">
+        <button class="btn" onclick="selectSampleProduct(0)">
   Buy Now
 </button>
       </div>
@@ -172,7 +172,7 @@
         <h3>Potato</h3>
         <p>Premium quality potato</p>
         <div class="price">₹55 / Kg</div>
-        <button class="btn" onclick="alert('Static Product 😄')">
+        <button class="btn" onclick="selectSampleProduct(1)">
   Buy Now
 </button>
       </div>
@@ -185,7 +185,7 @@
         <h3>RICE</h3>
         <p>Fresh RICE directly from farms</p>
         <div class="price">₹30 / Kg</div>
-        <button class="btn" onclick="alert('Static Product 😄')">
+        <button class="btn" onclick="selectSampleProduct(2)">
   Buy Now
 </button>
       </div>
@@ -201,7 +201,7 @@
       ₹120 / Kg
     </div>
 
-    <button class="btn">
+    <button class="btn" onclick="selectSampleProduct(3)">
       Buy Now
     </button>
   </div>
@@ -217,7 +217,7 @@
       ₹150 / Dozen
     </div>
 
-    <button class="btn">
+    <button class="btn" onclick="selectSampleProduct(4)">
       Buy Now
     </button>
   </div>
@@ -233,7 +233,7 @@
       ₹35 / Kg
     </div>
 
-    <button class="btn">
+    <button class="btn" onclick="selectSampleProduct(5)">
       Buy Now
     </button>
   </div>
@@ -249,7 +249,7 @@
       ₹50 / Kg
     </div>
 
-    <button class="btn">
+    <button class="btn" onclick="selectSampleProduct(6)">
       Buy Now
     </button>
   </div>
@@ -258,13 +258,107 @@
   </section>
 
   <footer>
+
+  <script>
+    const sampleProducts = [
+      {
+        name: 'Fresh Tomatoes',
+        desc: 'Organic farm tomatoes',
+        price: 40,
+        image: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?q=80&w=1200&auto=format&fit=crop'
+      },
+      {
+        name: 'Potato',
+        desc: 'Premium quality potato',
+        price: 55,
+        image: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?q=80&w=800&auto=format&fit=crop'
+      },
+      {
+        name: 'RICE',
+        desc: 'Fresh RICE directly from farms',
+        price: 30,
+        image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=800&auto=format&fit=crop'
+      },
+      {
+        name: 'Fresh Apples',
+        desc: 'Directly from Kashmir farms',
+        price: 120,
+        image: 'https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?q=80&w=1200&auto=format&fit=crop'
+      },
+      {
+        name: 'Organic Mango',
+        desc: 'Sweet Alphonso mangoes',
+        price: 150,
+        image: 'https://images.unsplash.com/photo-1553279768-865429fa0078?q=80&w=1200&auto=format&fit=crop'
+      },
+      {
+        name: 'Fresh Onion',
+        desc: 'Farm fresh red onions',
+        price: 35,
+        image: 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?q=80&w=1200&auto=format&fit=crop'
+      },
+      {
+        name: 'Organic Wheat',
+        desc: 'Premium quality wheat grains',
+        price: 50,
+        image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=1200&auto=format&fit=crop'
+      }
+    ];
+
+    function selectSampleProduct(index) {
+      localStorage.setItem('selectedCrop', JSON.stringify(sampleProducts[index]));
+      window.location.href = 'buy-product.html';
+    }
+  </script>
     © 2026 AgriConnect Marketplace
   </footer>
 <script>
 
-  const productSection = document.querySelector('.products');
+  const currentUser =
+    JSON.parse(localStorage.getItem("user"));
 
-  let products = JSON.parse(localStorage.getItem('products')) || [];
+  const navButtons =
+    document.querySelector("nav div");
+
+  if(currentUser){
+
+    if(currentUser.role === "farmer"){
+
+      navButtons.innerHTML = `
+      
+        <a href="../index.html">
+          Home
+        </a>
+
+        <a href="farmer-dashboard.html">
+          ${currentUser.name}
+        </a>
+
+      `;
+
+    }else{
+
+      navButtons.innerHTML = `
+      
+        <a href="../index.html">
+          Home
+        </a>
+
+        <a href="buyer-dashboard.html">
+          ${currentUser.name}
+        </a>
+
+      `;
+
+    }
+
+  }
+
+  const productSection =
+    document.querySelector('.products');
+
+  let products =
+    JSON.parse(localStorage.getItem('products')) || [];
 
   products.forEach((product,index) => {
 
@@ -285,68 +379,75 @@
 
           <p>${product.desc}</p>
 
-          <div class="price-row">
-
-            <div class="price">
-              ₹${product.price} / Kg
-            </div>
-
-            <button class="buy-btn" onclick="buyProduct(${index})">
-              Buy Now
-            </button>
-
+          <div class="price">
+            ₹${product.price} / Kg
           </div>
+
+          <button
+            class="btn"
+            onclick="buyProduct(${index})">
+
+            Buy Now
+
+          </button>
 
         </div>
 
       </div>
 
     `;
-  });
-
-</script>
-
-<script>
-
-function buyProduct(index){
-
-  let products = JSON.parse(localStorage.getItem('products')) || [];
-
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-  cart.push(products[index]);
-
-  localStorage.setItem('cart', JSON.stringify(cart));
-
-  alert("Product Added To Cart 😄");
-
-}
-
-const searchInput = document.getElementById("searchInput");
-
-searchInput.addEventListener("keyup", function(){
-
-  let filter = searchInput.value.toLowerCase();
-
-  let cards = document.querySelectorAll(".card");
-
-  cards.forEach(card => {
-
-    let title = card.querySelector("h3").innerText.toLowerCase();
-
-    if(title.includes(filter)){
-
-      card.style.display = "block";
-
-    }else{
-
-      card.style.display = "none";
-
-    }
 
   });
 
-});
+  function buyProduct(index){
+
+    let products =
+      JSON.parse(localStorage.getItem('products')) || [];
+
+    const selectedProduct =
+      products[index];
+
+    localStorage.setItem(
+      "selectedCrop",
+      JSON.stringify(selectedProduct)
+    );
+
+    window.location.href =
+      "buy-product.html";
+
+  }
+
+  const searchInput =
+    document.getElementById("searchInput");
+
+  searchInput.addEventListener("keyup", function(){
+
+    let filter =
+      searchInput.value.toLowerCase();
+
+    let cards =
+      document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+
+      let title =
+        card.querySelector("h3")
+        .innerText
+        .toLowerCase();
+
+      if(title.includes(filter)){
+
+        card.style.display = "block";
+
+      }else{
+
+        card.style.display = "none";
+
+      }
+
+    });
+
+  });
 
 </script>
 

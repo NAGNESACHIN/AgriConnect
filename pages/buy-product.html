@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Buy Product</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-100">
+
+  <nav class="bg-green-700 text-white p-4 flex justify-between items-center">
+
+    <h1 class="text-3xl font-bold">
+      🌾 AgriConnect
+    </h1>
+
+    <a
+      href="marketplace.html"
+      class="bg-yellow-400 text-black px-5 py-2 rounded-lg font-bold">
+
+      Marketplace
+
+    </a>
+
+  </nav>
+
+  <div
+    id="productContainer"
+    class="max-w-7xl mx-auto bg-white mt-10 rounded-2xl shadow-xl p-10 grid md:grid-cols-2 gap-10">
+
+  </div>
+
+  <script>
+
+    const crop =
+      JSON.parse(localStorage.getItem("selectedCrop"));
+
+    if (!crop) {
+      alert('Please select a product from the marketplace first.');
+      window.location.href = 'marketplace.html';
+    }
+
+    const container =
+      document.getElementById("productContainer");
+
+    container.innerHTML = `
+
+      <div>
+
+        <img
+          src="${crop.image}"
+          class="rounded-2xl w-full h-[500px] object-cover"
+        >
+
+      </div>
+
+      <div>
+
+        <h1 class="text-5xl font-bold text-green-700">
+          ${crop.name}
+        </h1>
+
+        <p class="mt-5 text-lg text-gray-600">
+          ${crop.desc || crop.description}
+        </p>
+
+        <div class="text-3xl font-bold text-green-700 mt-6">
+          ₹${crop.price}
+        </div>
+
+        <div class="mt-8">
+
+          <label class="font-bold text-lg">
+            Quantity
+          </label>
+
+          <input
+            id="quantity"
+            type="number"
+            value="1"
+            min="1"
+            class="w-full border p-3 rounded-lg mt-2"
+          >
+
+        </div>
+
+        <div class="flex gap-5 mt-8">
+
+          <button
+            onclick="addToCart()"
+            class="bg-yellow-400 text-black px-8 py-4 rounded-xl font-bold w-full">
+
+            Add To Cart
+
+          </button>
+
+          <button
+            onclick="placeOrder()"
+            class="bg-green-700 text-white px-8 py-4 rounded-xl font-bold w-full">
+
+            Buy Now
+
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+    function addToCart(){
+
+      const quantity =
+        document.getElementById("quantity").value;
+
+      let cart =
+        JSON.parse(localStorage.getItem("cart")) || [];
+
+      cart.push({
+        ...crop,
+        quantity
+      });
+
+      localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+      );
+
+      alert("Product Added To Cart 😄");
+
+    }
+
+    function placeOrder(){
+
+      alert("Order Placed Successfully 🌾");
+
+    }
+
+  </script>
+
+</body>
+</html>
