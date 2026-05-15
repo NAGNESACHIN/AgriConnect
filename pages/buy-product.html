@@ -93,6 +93,54 @@
 
         </div>
 
+        <div class="mt-8">
+
+          <label class="font-bold text-lg">
+            Delivery Location
+          </label>
+
+          <textarea
+            id="deliveryAddress"
+            placeholder="Enter your full delivery address"
+            class="w-full border p-3 rounded-lg mt-2 h-24"
+            required
+          ></textarea>
+
+        </div>
+
+        <div class="mt-8">
+
+          <label class="font-bold text-lg">
+            Payment Method
+          </label>
+
+          <div class="mt-2 space-y-2">
+
+            <label class="flex items-center">
+              <input
+                type="radio"
+                name="paymentMethod"
+                value="cod"
+                checked
+                class="mr-2"
+              >
+              Cash on Delivery (COD)
+            </label>
+
+            <label class="flex items-center">
+              <input
+                type="radio"
+                name="paymentMethod"
+                value="online"
+                class="mr-2"
+              >
+              Online Payment (UPI/Card)
+            </label>
+
+          </div>
+
+        </div>
+
         <div class="flex gap-5 mt-8">
 
           <button
@@ -141,7 +189,30 @@
 
     function placeOrder(){
 
-      alert("Order Placed Successfully 🌾");
+      const quantity = document.getElementById("quantity").value;
+      const deliveryAddress = document.getElementById("deliveryAddress").value.trim();
+      const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+
+      if (!deliveryAddress) {
+        alert("Please enter your delivery address.");
+        return;
+      }
+
+      const order = {
+        product: crop,
+        quantity: parseInt(quantity),
+        deliveryAddress,
+        paymentMethod,
+        orderDate: new Date().toISOString(),
+        totalPrice: crop.price * parseInt(quantity)
+      };
+
+      // Store order in localStorage (in a real app, this would go to backend)
+      let orders = JSON.parse(localStorage.getItem("orders")) || [];
+      orders.push(order);
+      localStorage.setItem("orders", JSON.stringify(orders));
+
+      alert(`Order Placed Successfully! 🌾\nPayment: ${paymentMethod === 'cod' ? 'Cash on Delivery' : 'Online Payment'}\nDelivery to: ${deliveryAddress}`);
 
     }
 
