@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AgriConnect Marketplace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="nav"><a class="brand" href="/"><span class="brand-mark">✦</span> AgriConnect</a><nav><a href="/">Procurement</a><a class="active" href="/marketplace.html">Marketplace</a><a href="/dashboard.html">Dashboard</a></nav><a class="nav-cta" href="/auth.html">Sign in →</a></header>
+<main class="market-main">
+  <section class="section market-head"><div><p class="eyebrow">DIRECT FARM-TO-BUYER MARKET</p><h1>Fresh crops from trusted farmers.</h1><p class="hero-text">Search, filter and make a direct offer without leaving AgriConnect.</p></div></section>
+  <section class="section"><div class="toolbar"><input id="search" placeholder="Search wheat, onion, mango…"><select id="category"><option value="all">All categories</option><option>Cereals</option><option>Vegetables</option><option>Fruits</option><option>Pulses</option></select><select id="sort"><option value="default">Recommended</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option><option value="rating">Top rated</option></select></div><div id="grid" class="market-grid"></div></section>
+</main>
+<div id="offerModal" class="modal" hidden><div class="modal-card"><button class="modal-close" id="closeModal">×</button><p class="eyebrow">DIRECT OFFER</p><h2 id="offerTitle">Make an offer</h2><form id="offerForm"><input type="hidden" id="cropId"><label>Quantity (kg)<input id="quantity" type="number" min="1" required></label><label>Your offer price (₹/kg)<input id="offerPrice" type="number" min="1" step="0.01" required></label><label>Delivery note<textarea id="note" rows="3" placeholder="Optional logistics or quality note"></textarea></label><button class="button primary" type="submit">Send offer</button></form><p id="offerMsg" class="muted"></p></div></div>
+<script src="/marketplace.js"></script>
+</body></html>
