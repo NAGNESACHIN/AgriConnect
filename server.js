@@ -81,7 +81,7 @@ app.post('/api/ai/chat', async (req, res) => {
       return res.status(502).json({ success: false, message: 'AI provider request failed.' });
     }
 
-    const reply = data.output_text || data.output?.flatMap((item) => item.content || []).map((part) => part.text || '').filter(Boolean).join('\n') || 'I could not generate a response.');
+    const reply = data.output_text || data.output?.flatMap((item) => item.content || []).map((part) => part.text || '').filter(Boolean).join('\n') || 'I could not generate a response.';
     res.json({ success: true, mode: 'live', reply });
   } catch (error) {
     console.error(error);
@@ -89,6 +89,6 @@ app.post('/api/ai/chat', async (req, res) => {
   }
 });
 
-app.get('*', (_req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
+app.use((_req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
 
 app.listen(PORT, () => console.log(`AgriConnect running on http://localhost:${PORT}`));
